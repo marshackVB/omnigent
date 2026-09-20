@@ -1,12 +1,12 @@
-# LangGraph from scratch: a tool-calling agent in five notebooks
+# omnigent — LangGraph from scratch
 
-A hands-on introduction for someone who has never used LangGraph. Each notebook
-hits a wall that the next one solves, ending at a graph with two nodes and one
-cycle that answers questions by calling three tools — sequencing them itself.
+A hands-on introduction to LangGraph for someone who has never used it, in five
+notebooks. Each one hits a wall that the next one solves, ending at a graph with
+two nodes and one cycle that answers questions by calling three tools —
+sequencing them itself.
 
-Built to be opened in a **Databricks workspace** as a git folder.
-
-All of it lives in [`langgraph-demo/`](langgraph-demo).
+Built to be opened in a **Databricks workspace** as a git folder. All of it lives
+in [`langgraph-demo/`](langgraph-demo).
 
 ## Running it in Databricks
 
