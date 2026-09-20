@@ -6,10 +6,13 @@ cycle that answers questions by calling three tools — sequencing them itself.
 
 Built to be opened in a **Databricks workspace** as a git folder.
 
+All of it lives in [`langgraph-demo/`](langgraph-demo).
+
 ## Running it in Databricks
 
 1. **Repos / Git folders → Add git folder**, pointing at this repository.
-2. Open `01_plain_llm.ipynb` and attach it to a cluster (DBR 13.3 LTS or later).
+2. Open [`langgraph-demo/01_plain_llm.ipynb`](langgraph-demo/01_plain_llm.ipynb)
+   and attach it to a cluster (DBR 13.3 LTS or later).
 3. Run the first cell. If the imports fail, run this in a cell above it, then
    restart Python:
    ```
@@ -22,7 +25,8 @@ notebook's own credentials.
 
 ### Model endpoint
 
-The notebooks call the serving endpoint named in `common.py`:
+The notebooks call the serving endpoint named in
+[`langgraph-demo/common.py`](langgraph-demo/common.py):
 
 ```python
 MODEL_ENDPOINT = "databricks-claude-sonnet-5"
@@ -43,16 +47,16 @@ Any tool-calling chat endpoint works — `databricks-claude-sonnet-4-6`,
 
 | Notebook | The idea | The wall it hits |
 |---|---|---|
-| `01_plain_llm.ipynb` | A model is text-in, text-out | No clock; arithmetic costs >1000 tokens |
-| `02_tool_calling.ipynb` | The five-step tool handshake, no framework | One round trip is not enough |
-| `03_manual_loop.ipynb` | The agent loop in ~15 lines of plain Python | Works, but production features tangle it |
-| `04_first_graph.ipynb` | State, nodes, edges, reducers | Every edge is fixed — no decisions |
-| `05_tool_agent.ipynb` | The full agent: conditional edge + cycle | — |
+| [1. A model alone](langgraph-demo/01_plain_llm.ipynb) | A model is text-in, text-out | No clock; arithmetic costs >1000 tokens |
+| [2. Tool calling](langgraph-demo/02_tool_calling.ipynb) | The five-step tool handshake, no framework | One round trip is not enough |
+| [3. The manual loop](langgraph-demo/03_manual_loop.ipynb) | The agent loop in ~15 lines of plain Python | Works, but production features tangle it |
+| [4. Your first graph](langgraph-demo/04_first_graph.ipynb) | State, nodes, edges, reducers | Every edge is fixed — no decisions |
+| [5. The full agent](langgraph-demo/05_tool_agent.ipynb) | The full agent: conditional edge + cycle | — |
 
 Supporting files, imported by the notebooks rather than opened directly:
 
-- **`common.py`** — `make_llm()` and the `text_of()` message helper
-- **`tools.py`** — the three tools
+- [**`common.py`**](langgraph-demo/common.py) — `make_llm()` and the `text_of()` message helper
+- [**`tools.py`**](langgraph-demo/tools.py) — the three tools
 
 The notebooks are the source of truth: edit them directly, in Databricks or
 anywhere else. They ship with **no stored outputs**, so you watch cells run
@@ -134,7 +138,8 @@ blocks). Do not replace it with `.content`.
 `system.ai.claude-*` form is a Unity Catalog model name and returns a 404 from
 `ChatDatabricks` — it only works through an AI Gateway.
 
-**Tool safety.** `tools.py` parses arithmetic with `ast` instead of `eval()`, and
+**Tool safety.** [`tools.py`](langgraph-demo/tools.py) parses arithmetic with
+`ast` instead of `eval()`, and
 caps exponent size. Both matter: `eval()` would run
 `__import__("os").system(...)` if the model were induced to send it, and
 `9**9**9` — five characters — wedges the interpreter computing a
