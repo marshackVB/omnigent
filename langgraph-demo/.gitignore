@@ -1,0 +1,6 @@
+.venv/
+__pycache__/
+*.pyc
+
+# Jupyter / Databricks notebook scratch state
+.ipynb_checkpoints/

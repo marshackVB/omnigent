@@ -1,0 +1,14 @@
+# Verified against these versions (2026-09).
+#
+# In a Databricks workspace, install with:
+#   %pip install langgraph databricks-langchain grandalf
+# langchain-core arrives as a dependency.
+
+langgraph==1.2.11
+langchain-core==1.6.3
+databricks-langchain==0.20.0
+grandalf==0.8              # only needed for graph.draw_ascii()
+
+# Optional: only for running these notebooks OUTSIDE Databricks, against an
+# AI Gateway with a bearer token (see the fallback branch in common.py).
+# langchain-anthropic==1.7.2
